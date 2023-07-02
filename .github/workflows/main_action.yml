@@ -60,4 +60,4 @@ jobs:
 
       - name: terraform destroy
         if: contains(github.event.head_commit.message, 'destroy)
-        run: terraform destroy -lock=false -auto-approve -var="project_id=${{ secrest.GCP_PROJECT_ID }}"
+        run: terraform destroy -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
