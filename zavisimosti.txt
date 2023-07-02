@@ -1,5 +1,0 @@
-aiogram
-asyncio
-json
-requests
-datetime
