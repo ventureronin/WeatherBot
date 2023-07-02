@@ -5,7 +5,7 @@ FROM python:3.9
 # WORKDIR /app
 
 COPY requirments.txt .
-RUN pip install --na-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY loader /app/loader
 COPY utils /app/utils
