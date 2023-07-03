@@ -1,3 +1,20 @@
+variable "GCP_PROJECT_ID" {
+  description = "Google Cloud Project ID"
+  type        = string
+}
+
+variable "region_prj" {
+  description = "Region for the project"
+  type        = string
+  default     = "europe-north1"
+}
+
+variable "zone_prj" {
+  description = "Zone for the project"
+  type        = string
+  default     = "europe-north1-a"
+}
+
 terraform {
   required_providers {
     google = {
@@ -25,12 +42,4 @@ resource "google_compute_instance" "WeatherBotServer" {
   boot_disk {
     mode = "READ_WRITE"  # Замените на соответствующее значение для вашего случая
   }
-}
-
-variable "region_prj" {
-  default = "europe-north1"
-}
-
-variable "zone_prj" {
-  default = "europe-north1-a"
 }
