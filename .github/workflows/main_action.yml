@@ -40,6 +40,10 @@ jobs:
           if [ -f "credentials.json" ]; then
             echo "File credentials.json exists"
             cat credentials.json
+          else
+            echo "File credentials.json does not exist"
+            exit 1
+          fi
 
       - name: Authenticate with Google Cloud
         run: |
