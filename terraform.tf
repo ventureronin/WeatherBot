@@ -9,7 +9,7 @@ terraform {
 
 provider "google" {
   credentials = file("credentials.json")
-  project     = var.project_id
+  project     = var.TF_VAR_project_id
   region      = var.region_prj
   zone        = var.zone_prj
 }
@@ -27,14 +27,10 @@ resource "google_compute_instance" "WeatherBotServer" {
   }
 }
 
-variable "project_id" {
-  default = ""
-}
-
 variable "region_prj" {
-  default = "us-central1"
+  default = "europe-north1"
 }
 
 variable "zone_prj" {
-  default = "us-central1-a"
+  default = "europe-north1-a"
 }
