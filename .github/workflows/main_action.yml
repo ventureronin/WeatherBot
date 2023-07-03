@@ -35,7 +35,7 @@ jobs:
         run: docker push $DOCKER_LOGIN/$DOCKER_NAME:${GITHUB_REF:11}
 
       - name: Decode credentials
-        run: echo "${{ secrets.GCP_CREDENTIALS }}" | base 64 -d > credentials.json
+        run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials.json
 
       - name: Authenticate with Google Cloud
         run: |
