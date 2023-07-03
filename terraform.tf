@@ -6,8 +6,9 @@ terraform {
     }
   }
 }
+
 provider "google" {
-  credentials = "${file("credentials.json")}"
+  credentials = file("credentials.json")
   project     = var.project_id
   region      = var.region_prj
   zone        = var.zone_prj
@@ -20,7 +21,10 @@ resource "google_compute_instance" "WeatherBotServer" {
   network_interface {
     network = "default"
   }
-  boot_disk {}
+
+  boot_disk {
+    mode = "READ_WRITE"  # Замените на соответствующее значение для вашего случая
+  }
 }
 
 variable "project_id" {
