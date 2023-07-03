@@ -8,8 +8,8 @@ on:
 
 env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  DOCKER_NAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_NAME: ${{ secrets.DOCKER_REPONAME }}
+  DOCKER_LOGIN: ${{ secrets.DOCKER_USERNAME }}
   SA_NAME: ${{ secrets.sa_account }}
   REGION: us-central1
   REPO: ventureronin/WeatherBot
@@ -25,14 +25,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build Docker image
-        run: docker build -t tgweatherbotpy .
-
       - name: Login to Docker Hub
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        run:  echo ${{ $DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
+      - name: Build Docker image
+        run: docker build -t $DOCKER_LOGIN/$DOCKER_NAME:${GITHUB_REF:11} -f Dockerfile .
+        
       - name: Push Docker image
-        run: docker push tgweatherbotpy
+        run: docker push $DOCKER_LOGIN/$DOCKER_NAME:${GITHUB_REF:11}
 
       - name: Decode credentials
         run: echo "${{ secrets.GCP_CREDENTIALS }}" | base 64 -d > credentials.json
