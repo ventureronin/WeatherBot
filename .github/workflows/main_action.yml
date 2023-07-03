@@ -11,7 +11,7 @@ env:
   DOCKER_NAME: ${{ secrets.DOCKER_REPONAME }}
   DOCKER_LOGIN: ${{ secrets.DOCKER_USERNAME }}
   SA_NAME: ${{ secrets.sa_account }}
-  REGION: us-central1
+  REGION: europe-north1
   REPO: ventureronin/WeatherBot
 
 jobs:       
