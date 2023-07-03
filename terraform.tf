@@ -6,13 +6,13 @@ variable "GCP_PROJECT_ID" {
 variable "region_prj" {
   description = "Region for the project"
   type        = string
-  default     = "europe-north1"
+  default     = "us-central1"
 }
 
 variable "zone_prj" {
   description = "Zone for the project"
   type        = string
-  default     = "europe-north1-a"
+  default     = "us-central1-a"
 }
 
 terraform {
