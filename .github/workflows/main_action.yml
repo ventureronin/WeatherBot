@@ -39,7 +39,7 @@ jobs:
 
       - name: Authenticate with Google Cloud
         run: |
-          gcloud config set account ${SA_NAME}
+          gcloud config set account $SA_NAME
           gcloud auth activate-service-account --key-file=credentials.json
           gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
