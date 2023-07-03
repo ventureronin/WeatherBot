@@ -11,11 +11,47 @@ env:
   DOCKER_NAME: ${{ secrets.DOCKER_REPONAME }}
   DOCKER_LOGIN: ${{ secrets.DOCKER_USERNAME }}
   SA_NAME: ${{ secrets.sa_account }}
-  REGION: europe-north1
+  REGION: us-central1
   REPO: ventureronin/WeatherBot
 
-jobs:       
+jobs:
+  auth_DH_GCP:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Login to Docker Hub
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        
+      - name: Decode credentials
+        run: |
+          echo "${{ secrets.GCP_CREDETIALS }}" | base64 -d > credentials.json
+          if [ -f "credentials.json" ]; then
+            echo "File credentials.json exists"
+            cat credentials.json
+            chmod 777 credentials.json
+          else
+            echo "File credentials.json does not exist"
+            exit 1
+          fi
+
+      - name: Authenticate with Google Cloud
+        run: |
+          ls
+          cat credentials.json
+          gcloud config set account ${SA_NAME}
+          gcloud auth activate-service-account --key-file=credentials.json
+          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Check GCP permissions
+        run: |
+          gcloud projects add-iam-policy-binding ${{ secrets.GCP_PROJECT_ID }} --member=serviceAccount:${SA_NAME} --role=roles/compute.viewer
+          gcloud compute zones describe $REGION --project=${{ secrets.GCP_PROJECT_ID }}
+
+        
   terraform-CI:
+    needs: auth_DH_GCP
     runs-on: ubuntu-latest
     defaults:
       run:
