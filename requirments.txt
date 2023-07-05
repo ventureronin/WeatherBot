@@ -1,6 +1,0 @@
-'aiogram==2.25.1'
-'aioschedule==0.5.2'
-'datetime==5.1'
-'json==2.0.9'
-'requests==2.25.1'
-
