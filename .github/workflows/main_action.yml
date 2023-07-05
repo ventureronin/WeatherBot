@@ -115,12 +115,12 @@ jobs:
 
       - name: terraform plan
         id: plan
-        run: terraform plan -lock=false -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+        run: terraform plan -lock=false -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}"
 
       - name: terraform apply
         if: "!contains(github.event.head_commit.message, 'destroy')"
-        run: terraform apply -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+        run: terraform apply -lock=false -auto-approve -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}"
 
       - name: terraform destroy
         if: contains(github.event.head_commit.message, 'destroy')
-        run: terraform destroy -lock=false -auto-approve -var="project_id=${{ secrets.GCP_PROJECT_ID }}"
+        run: terraform destroy -lock=false -auto-approve -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}"
