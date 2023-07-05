@@ -10,7 +10,7 @@ env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   DOCKER_NAME: ${{ secrets.DOCKER_REPONAME }}
   DOCKER_LOGIN: ${{ secrets.DOCKER_USERNAME }}
-  SA_NAME: ${{ secrets.sa_account }}
+  SA_NAME: ${{ secrets.SA_ACCOUNT }}
   REGION: us-central1
   REPO: ventureronin/WeatherBot
 
