@@ -91,10 +91,10 @@ jobs:
           gcloud auth activate-service-account --key-file=credentials.json
           gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Check GCP permissions
-        run: |
-          gcloud projects add-iam-policy-binding ${{ secrets.GCP_PROJECT_ID }} --member=serviceAccount:${SA_NAME} --role=roles/compute.viewer
-          gcloud compute zones describe $REGION --project=${{ secrets.GCP_PROJECT_ID }}
+#       - name: Check GCP permissions
+#         run: |
+#           gcloud projects add-iam-policy-binding ${{ secrets.GCP_PROJECT_ID }} --member=serviceAccount:${SA_NAME} --role=roles/compute.viewer
+#           gcloud compute zones describe $REGION --project=${{ secrets.GCP_PROJECT_ID }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
