@@ -28,6 +28,7 @@ jobs:
         run: |
           echo "${{ secrets.GCP_CREDETIALS }}" | base64 -d > credentials.json
           if [ -f "credentials.json" ]; then
+            cat credentials.json
             echo "File credentials.json exists"
             chmod 777 credentials.json
           else
@@ -45,6 +46,7 @@ jobs:
         run: |
           gcloud alpha iam policies lint-condition
           gcloud compute zones describe $REGION --project=${{ secrets.GCP_PROJECT_ID }}
+          
   terraform-ci1:
     needs: auth_DH_GCP
     runs-on: ubuntu-latest
