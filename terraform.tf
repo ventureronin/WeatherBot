@@ -37,6 +37,8 @@ resource "google_compute_instance" "weatherbotserver" {
   }
 
   boot_disk {
-    mode = "READ_WRITE"  # Замените на соответствующее значение для вашего случая
+    initialize_params {
+      image = "ubuntu-2204-jammy-v20230630"
+    }
   }
 }
