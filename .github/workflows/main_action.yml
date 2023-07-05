@@ -46,6 +46,7 @@ jobs:
 
       - name: Check GCP permissions
         run: |
+          gcloud alpha iam policies lint-condition
           gcloud projects add-iam-policy-binding ${{ secrets.GCP_PROJECT_ID }} --member=serviceAccount:${SA_NAME} --role=roles/compute.owner
           gcloud compute zones describe $REGION --project=${{ secrets.GCP_PROJECT_ID }}
 
