@@ -44,8 +44,8 @@ jobs:
 
       - name: Check GCP permissions 2
         run: gcloud auth list 
-      - name: Check GCP permissions 3
-        run: gcloud compute zones describe $REGION --project=${{ secrets.GCP_PROJECT_ID }}
+#       - name: Check GCP permissions 3
+#         run: gcloud compute zones describe $REGION --project=${{ secrets.GCP_PROJECT_ID }}
           
   terraform-ci1:
     needs: auth_DH_GCP
