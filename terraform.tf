@@ -30,7 +30,7 @@ provider "google" {
 
 resource "google_compute_instance" "weatherbotserver" {
   machine_type = "f1-micro"
-  name         = "Weather-Bot-Server"
+  name         = "weatherbotserver"
 
   network_interface {
     network = "default"
