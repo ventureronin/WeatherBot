@@ -1,5 +1,6 @@
 variable "GCP_PROJECT_ID" {
   description = "Google Cloud Project ID"
+  default     = var.GCP_PROJECT_ID != "" ? var.GCP_PROJECT_ID : var.secret_project_id
   type        = string
 }
 
