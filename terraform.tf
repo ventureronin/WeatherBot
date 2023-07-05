@@ -1,8 +1,4 @@
-variable "GCP_PROJECT_ID" {
-  description = "Google Cloud Project ID"
-  default     = var.GCP_PROJECT_ID != "" ? var.GCP_PROJECT_ID : var.secret_project_id
-  type        = string
-}
+variable "GCP_PROJECT_ID" {}
 
 variable "region_prj" {
   description = "Region for the project"
