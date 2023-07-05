@@ -14,54 +14,7 @@ env:
   REGION: us-central1
   REPO: ventureronin/WeatherBot
 
-jobs:          
-  terraform-ci1:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
-      - name: Decode credentials
-        run: |
-          echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials.json
-          if [ -f "credentials.json" ]; then
-            echo "File credentials.json exists"
-            chmod 777 credentials.json
-          else
-            echo "File credentials.json does not exist"
-            exit 1
-          fi
-
-      - name: Authenticate with Google Cloud
-        run: |
-          echo "${{ secrets.GCP_PROJECT_ID }}"
-          gcloud config set account ${SA_NAME}
-          gcloud auth activate-service-account --key-file=credentials.json
-          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: latest
-          terraform_wrapper: false
-
-      - name: terraform init
-        run: |
-          terraform init
-          ls
-
-      - name: terraform plan
-        id: plan
-        run: terraform plan -lock=false -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}"
-
-      - name: terraform apply
-        if: "!contains(github.event.head_commit.message, 'destroy')"
-        run: terraform apply -lock=false -auto-approve -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}"
-        
+jobs:                
   terraform-CI:
     runs-on: ubuntu-latest
     defaults:
