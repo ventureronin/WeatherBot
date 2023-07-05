@@ -42,6 +42,7 @@ jobs:
       - name: Authenticate with Google Cloud 2
         run: |
           ls
+          cat credentials.json
           gcloud auth activate-service-account --key-file=credentials.json
       
       - name: Authenticate with Google Cloud 3
