@@ -28,7 +28,7 @@ provider "google" {
   zone        = var.zone_prj
 }
 
-resource "google_compute_instance" "weather-bot-server" {
+resource "google_compute_instance" "weatherbotserver" {
   machine_type = "f1-micro"
   name         = "Weather-Bot-Server"
 
