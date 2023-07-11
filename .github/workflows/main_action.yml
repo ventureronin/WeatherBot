@@ -14,7 +14,7 @@ env:
   REGION: us-central1
   REPO: ventureronin/WeatherBot
 
-jobs:                
+jobs:          
   terraform-CI:
     runs-on: ubuntu-latest
     defaults:
@@ -25,21 +25,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Login to Docker Hub
-        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-
-      - name: Build Docker image
-        run: docker build -t $DOCKER_LOGIN/$DOCKER_NAME:${GITHUB_REF:11} -f Dockerfile .
-        
-      - name: Push Docker image
-        run: docker push $DOCKER_LOGIN/$DOCKER_NAME:${GITHUB_REF:11}
-        
       - name: Decode credentials
         run: |
           echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials.json
           if [ -f "credentials.json" ]; then
             echo "File credentials.json exists"
-            cat credentials.json
             chmod 777 credentials.json
           else
             echo "File credentials.json does not exist"
@@ -53,7 +43,7 @@ jobs:
           gcloud auth activate-service-account --key-file=credentials.json
           gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Check GCP permissions 2
+      - name: Check GCP permissions
         run: gcloud auth list
         
       - name: Setup Terraform
