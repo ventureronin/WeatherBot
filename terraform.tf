@@ -32,6 +32,7 @@ resource "google_compute_instance" "weatherbotserver" {
   machine_type = "f1-micro"
   name         = "weatherbotserver"
 
+
   network_interface {
     network = "default"
   }
@@ -41,4 +42,8 @@ resource "google_compute_instance" "weatherbotserver" {
       image = "ubuntu-2204-jammy-v20230630"
     }
   }
+}
+
+output "external_ip" {
+  value = google_compute_instance.weatherbotserver.network_interface.0.access_config.0.nat_ip
 }
