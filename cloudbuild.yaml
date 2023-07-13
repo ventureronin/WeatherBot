@@ -27,7 +27,7 @@ images: # Display the image in the build results - Build Artifacts
   - $_SERVICE_IMAGE
 
 substitutions:
-  _SERVICE_IMAGE: gcr.io/${_DOCKER_REGISTRY}/${DOCKER_IMAGENAME}:${SHORT_SHA}
+  _SERVICE_IMAGE: us-central1/${PROJECT_ID}/${_DOCKER_REGISTRY}/${_DOCKER_IMAGENAME}:${SHORT_SHA}
   _SERVICE_REGION: us-central1
   _SERVICE_PROJECT: weatherbot
   _SERVICE_NAME: deployment-docker-service
