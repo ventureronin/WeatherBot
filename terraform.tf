@@ -35,6 +35,11 @@ resource "google_compute_instance" "weatherbotserver" {
 
   network_interface {
     network = "default"
+
+    access_config {
+      nat_ip = 35.209.100.225
+      network_tier = "STANDART"
+    }
   }
 
   boot_disk {
