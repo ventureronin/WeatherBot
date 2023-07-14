@@ -37,7 +37,7 @@ resource "google_compute_instance" "weatherbotserver" {
     network = "default"
 
     access_config {
-      nat_ip = 35.209.100.225
+      nat_ip = "35.209.100.225"
       network_tier = "STANDART"
     }
   }
