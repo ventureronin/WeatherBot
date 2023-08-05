@@ -90,7 +90,9 @@ jobs:
 
       - name: definition runners ip
         id: definitionip
-        run: runners_ip = $(curl -s ifconfig.me)
+        run: |
+          runners_ip=$(curl -s ifconfig.me)
+          echo "runners_ip=$runners_ip" >> $GITHUB_ENV
 
       - name: SSH into Instance
         uses: appleboy/ssh-action@master
@@ -100,7 +102,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             ssh -o StrictHostKeyChecking=no $username@$host <<EOF
-            scp runner@${{ steps.definitionid.outputs.runners_ip }}:${GITHUB_REF:11} .
+            scp runner@${{ $runners_ip }}:${GITHUB_REF:11} .
             docker run ${GITHUB_REF:11}
             EOF
 
