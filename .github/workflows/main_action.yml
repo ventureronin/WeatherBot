@@ -74,10 +74,16 @@ jobs:
         if: "!contains(github.event.head_commit.message, 'destroy')"
         run: terraform apply -lock=false -auto-approve -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}"
 
-      - name: define tgapi token and opt.json
+      - name: decode and define tgapi token and opt.json
         run: |
-          echo ${{ secrets.TG_PROD_TOKEN }} >> config
-          echo ${{ secrets.OPT_JSON }} >> opt.json
+          echo ${{ secrets.TG_PROD_TOKEN }} > config
+          echo "${{ secrets.OPT_JSON }}" | base64 -d > opt.json
+          if [ -f "opt.json"]; then
+            echo "File opt.json exists"
+          else
+            echo "File opt.json does not exist"
+            exit 1
+          fi
 
       - name: build docker Image
         run: docker build -t ${GITHUB_REF:11} -f Dockerfile .
