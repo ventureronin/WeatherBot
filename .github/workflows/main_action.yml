@@ -102,7 +102,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             ssh -o StrictHostKeyChecking=no $username@$host <<EOF
-            scp runner@${{ $env.runners_ip }}:${GITHUB_REF:11} .
+            scp runner@${{ env.runners_ip }}:${GITHUB_REF:11} .
             docker run ${GITHUB_REF:11}
             EOF
 
