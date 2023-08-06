@@ -78,7 +78,7 @@ jobs:
         run: |
           echo ${{ secrets.TG_PROD_TOKEN }} > config
           echo "${{ secrets.OPT_JSON }}" | base64 -d > opt.json
-          if [ -f "opt.json"]; then
+          if [ -f "opt.json" ]; then
             echo "File opt.json exists"
           else
             echo "File opt.json does not exist"
