@@ -93,6 +93,7 @@ jobs:
         run: |
           runners_ip=$(curl -s ifconfig.me)
           echo "runners_ip=$runners_ip" >> $GITHUB_ENV
+          echo "${{ steps.get_external_ip.outputs.external_ip }}"
 
       - name: SSH into Instance
         uses: appleboy/ssh-action@master
