@@ -69,7 +69,7 @@ jobs:
         run: |
           external_ip=$(terraform output -raw external_ip)
 #          echo "::set-output name=external_ip::$external_ip"
-          echo "{external_ip}={$external_ip} >> $GITHUB_OUTPUT
+          echo "external_ip=$external_ip >> $GITHUB_OUTPUT
 
       - name: terraform apply
         if: "!contains(github.event.head_commit.message, 'destroy')"
