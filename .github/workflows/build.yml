@@ -1,13 +1,13 @@
- name: Docker
+name: Docker
 
- on:
-   push:
-     paths:
-       - 'app/**'
-       - '.github/workflows/build.yml'
-     branches:
-       - main
-   workflow_dispatch:
+on:
+  push:
+    paths:
+      - 'app/**'
+      - '.github/workflows/build.yml'
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   Docker-build-push:
