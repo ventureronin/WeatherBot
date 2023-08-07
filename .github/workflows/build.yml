@@ -17,8 +17,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-#      - name: define telegram API token
-#        run: echo ${{ secrets.TG_PROD_TOKEN }} > app/config
+      - name: define telegram API token
+        run: echo ${{ secrets.TG_PROD_TOKEN }} > app/config
 
       - name: decode and define opt.json
         run: |
@@ -53,7 +53,7 @@ jobs:
           tags: ventureronin/tg_weatherbot:latest
           no-cache: true
           secrets: |
-            "tg_token=${{ secrets.TG_PROD_TOKEN }}"
+            "tg_token=./config"
 #
 #      -
 #        name: Image digest

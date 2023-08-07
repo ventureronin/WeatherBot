@@ -4,8 +4,8 @@ COPY app/config /temp/
 WORKDIR /application/
 COPY ./app /application/
 RUN --mount=type=secret, id=tg_token && \
-    cat /run/secrets/tg_token &&\
-    ls -la && \
+    cat /run/secrets/tg_token
+RUN ls -la && \
     pip install --no-cache-dir -r requirements.txt
 
 CMD python app.py
