@@ -13,6 +13,19 @@ jobs:
   Docker-build-push:
     runs-on: ubuntu-latest
     steps:
+      - name: define telegram API token
+        run: echo ${{ secrets.TG_PROD_TOKEN }} > app/config
+
+      - name: decode and define opt.json
+        run: |
+          echo ${{ secrets.OPT_JSON }}" base64 -d > app/opt.json
+          if [ -f "app/opt.json" ]; then
+            echo "File opt.json exists"
+          else
+            echo "File opt.json does not exist"
+            exit 1
+          fi
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -32,7 +45,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ventureronin/tg_weather_bot:latest
+          tags: ventureronin/tg_weatherbot:latest
 #
 #      -
 #        name: Image digest
