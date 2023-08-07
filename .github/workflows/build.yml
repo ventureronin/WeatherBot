@@ -28,6 +28,7 @@ jobs:
             echo "File opt.json does not exist"
             exit 1
           fi
+          ls -la app
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -42,8 +43,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
 # Download artifact, rds,
-      -
-        name: Build and push
+      - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v4
         with:
