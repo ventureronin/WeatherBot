@@ -49,7 +49,7 @@ jobs:
         with:
           push: true
           tags: ventureronin/tg_weatherbot:latest
-          cache_from: none
+          cache_from: no-cache
 #
 #      -
 #        name: Image digest
