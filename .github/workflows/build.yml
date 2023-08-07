@@ -21,7 +21,7 @@ jobs:
 
       - name: decode and define opt.json
         run: |
-          echo ${{ secrets.OPT_JSON }}" base64 -d > app/opt.json
+          echo '${{ secrets.OPT_JSON }}' base64 -d > app/opt.json
           if [ -f "app/opt.json" ]; then
             echo "File opt.json exists"
           else
