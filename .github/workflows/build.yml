@@ -32,7 +32,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: tg_weather_bot:latest
+          tags: ventureronin/tg_weather_bot:latest
 #
 #      -
 #        name: Image digest
