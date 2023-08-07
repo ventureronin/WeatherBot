@@ -1,0 +1,34 @@
+ name: Docker
+
+ on:
+   push:
+     paths:
+       - 'app/**'
+       - '.github/workflows/build.yml'
+     branches:
+       - main
+   workflow_dispatch:
+
+jobs:
+  Docker-build-push:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+# Download artifact, rds,
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_REPO }}:${GITHUB_REF:11}
+#
+#      -
+#        name: Image digest
+#        run: echo ${{steps.docker_build.outputs.digest }}

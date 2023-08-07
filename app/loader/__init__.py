@@ -1,10 +1,12 @@
 import json
-from config import tg_token
+# from app.config import tg_token
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from aiogram.contrib.middlewares.logging import LoggingMiddleware
+# from aiogram.contrib.middlewares.logging import LoggingMiddleware
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
+with open('config', 'r')as file:
+    tg_token = file.read().strip()
 bot = Bot(token=tg_token, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot, storage=MemoryStorage())
 # dp.middleware.setup(LoggingMiddleware())

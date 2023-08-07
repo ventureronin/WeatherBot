@@ -1,7 +1,7 @@
-FROM python:3.9.7
-
-WORKDIR /app
-COPY loader/ utils/ app.py config opt.json requirements.txt ./
+FROM python:3.9.7-slim
+RUN mkdir /application/
+WORKDIR /application/
+COPY ./app /application/.
 RUN pip install --no-cache-dir -r requirements.txt
 
 CMD python app.py

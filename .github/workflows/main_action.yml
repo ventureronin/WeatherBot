@@ -1,9 +1,9 @@
 name: Weather_Bot_inGCP
 
 on:
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
   workflow_dispatch:
 
 env:

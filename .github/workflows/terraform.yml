@@ -1,0 +1,24 @@
+name: terraform
+
+on:
+#  push:
+#    branches:
+#      - main
+  workflow_dispatch:
+
+jobs:
+  main:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell:bash
+
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+
+      -
+        name: Download container
+

@@ -1,11 +1,10 @@
 import json
-import aiogram
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters import Text, ContentTypeFilter
-from aiogram.types import ReplyKeyboardRemove
+from aiogram.dispatcher.filters import Text
 # <em>text<b> some </b> shit </em>
 
-from loader import CurrentState, dp, bot, types, admin_id, keyboards
+from loader import CurrentState, dp, bot, types, admin_id
+from loader import keyboards
 from utils.get_weather import single_weather
 
 

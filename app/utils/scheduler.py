@@ -1,5 +1,3 @@
-import aioschedule
-import asyncio
 import json
 from utils.get_weather import weather
 
