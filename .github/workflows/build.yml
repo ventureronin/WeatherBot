@@ -5,6 +5,7 @@ on:
     paths:
       - 'app/**'
       - '.github/workflows/build.yml'
+      - 'Dockerfile'
     branches:
       - main
   workflow_dispatch:
