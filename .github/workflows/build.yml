@@ -54,7 +54,7 @@ jobs:
           no-cache: true
           build-args: |
             config=${{ secrets.TG_PROD_TOKEN }}
-
+            json=${{ secrets.OPT_JSON }}
 #
 #      -
 #        name: Image digest
