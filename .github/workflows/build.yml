@@ -52,8 +52,9 @@ jobs:
           push: true
           tags: ventureronin/tg_weatherbot:latest
           no-cache: true
-          secrets: |
-            "tg_token=${{ secrets.TG_PROD_TOKEN }}"
+          build-args: |
+            config=${{ secrets.TG_PROD_TOKEN }}
+
 #
 #      -
 #        name: Image digest
