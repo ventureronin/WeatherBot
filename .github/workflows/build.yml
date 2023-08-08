@@ -17,21 +17,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: define telegram API token
-        run: echo ${{ secrets.TG_PROD_TOKEN }} > app/config
-
-      - name: decode and define opt.json
-        run: |
-          echo '${{ secrets.OPT_JSON }}' base64 -d > app/opt.json
-          if [ -f "app/opt.json" ]; then
-            echo "File opt.json exists"
-          else
-            echo "File opt.json does not exist"
-            exit 1
-          fi
-          ls -la
-          ls -la app
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -55,7 +40,3 @@ jobs:
           build-args: |
             config=${{ secrets.TG_PROD_TOKEN }}
             json=${{ secrets.OPT_JSON }}
-#
-#      -
-#        name: Image digest
-#        run: echo ${{steps.docker_build.outputs.digest }}
