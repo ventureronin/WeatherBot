@@ -54,7 +54,8 @@ jobs:
   Terraform:
     name: 'Terraform set up'
     needs: testing-logins
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
+
     steps:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
