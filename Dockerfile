@@ -5,7 +5,7 @@ COPY ./app /application/
 ARG config
 ARG json
 ENV config=$config
-    json=$json
+ENV json=$json
 RUN echo $config > /application/config && \
     echo $json > /application/opt.json && \
     ls -la && \
