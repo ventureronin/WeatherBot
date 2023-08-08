@@ -53,7 +53,7 @@ jobs:
           tags: ventureronin/tg_weatherbot:latest
           no-cache: true
           secrets: |
-            "tg_token=./config"
+            "tg_token=${{ secrets.TG_PROD_TOKEN }}"
 #
 #      -
 #        name: Image digest
