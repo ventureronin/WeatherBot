@@ -3,7 +3,7 @@ name: terraform deploy
 on:
   push:
     paths:
-      - '.github/workflow/terraform.yml'
+      - '.github/workflows/terraform.yml'
     branches:
       - main
   workflow_run:
@@ -13,8 +13,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  Google-Auth&Docker-pull:
-    name: 'login to GCP&DockerHub'
+  Google-Auth_Docker-pull:
+    name: 'Login to GCP and DockerHub'
     runs-on: ubuntu-latest
 
     steps:
