@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  testing-logins:
+  Google-Auth&Docker-pull:
     name: 'login to GCP&DockerHub'
     runs-on: ubuntu-latest
 
@@ -41,12 +41,12 @@ jobs:
             exit 1
           fi
 
-      - name: Authenticate with Google Cloud
-        run: |
-          echo "${{ secrets.GCP_PROJECT_ID }}"
-          gcloud config set account ${{ secrets.SA_ACCOUNT }}
-          gcloud auth activate-service-account --key-file=credentials.json
-          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+      - name: Authenticate to Google Cloud
+        id: 'auth'
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: credentials.json
+          service_account: ${{ secrets.SA_ACCOUNT }}
 
       - name: Check GCP permissions
         run: gcloud auth list

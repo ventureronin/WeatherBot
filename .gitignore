@@ -1,9 +1,6 @@
 /venv/
 .idea/
 /compose-dev.yaml
-/app/config.py
 /app/opt.json
-/app/config.py
-/app/opt.json
-/app/config.py
 /app/config
+/main_action.yml
