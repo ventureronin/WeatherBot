@@ -36,6 +36,7 @@ jobs:
           if [ -f "credentials.json" ]; then
             echo "File credentials.json exists"
             chmod 777 credentials.json
+            cat credentials.json
           else
             echo "File credentials.json does not exist"
             exit 1
