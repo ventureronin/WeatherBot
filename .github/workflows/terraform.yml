@@ -47,7 +47,7 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           credentials_json: credentials.json
-          service_account: ${{ secrets.SA_ACCOUNT }}
+          #service_account: ${{ secrets.SA_ACCOUNT }}
 
       - name: Check GCP permissions
         run: gcloud auth list
