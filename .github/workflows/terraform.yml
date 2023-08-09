@@ -53,7 +53,7 @@ jobs:
 
   Terraform:
     name: 'Terraform set up'
-    needs: testing-logins
+    needs: Google-Auth_Docker-pull
     runs-on: ubuntu-latest
 
     steps:
