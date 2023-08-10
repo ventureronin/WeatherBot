@@ -30,23 +30,24 @@ jobs:
       - name: Download container
         run: docker pull ventureronin/tg_weatherbot:latest
 
-      - name: Decode credentials
-        run: |
-          echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials.json
-          if [ -f "credentials.json" ]; then
-            echo "File credentials.json exists"
-            chmod 777 credentials.json
-            cat credentials.json
-          else
-            echo "File credentials.json does not exist"
-            exit 1
-          fi
+#      - name: Decode credentials
+#        run: |
+#          echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > credentials.json
+#          if [ -f "credentials.json" ]; then
+#            echo "File credentials.json exists"
+#            chmod 777 credentials.json
+#            cat credentials.json
+#          else
+#            echo "File credentials.json does not exist"
+#            exit 1
+#          fi
 
       - name: Authenticate to Google Cloud
         id: 'auth'
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: credentials.json
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+          #credentials.json
           #service_account: ${{ secrets.SA_ACCOUNT }}
 
       - name: Check GCP permissions
