@@ -82,7 +82,7 @@ jobs:
 
       - name: Terraform plan
         working-directory: terraform
-        run: terraform plan -lock=false -var-file=tfvars.tfvars
+        run: terraform plan -lock=false -var-file=tfvars.tf
 
 # get external ip?
       - name: Terraform apply
