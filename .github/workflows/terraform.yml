@@ -50,6 +50,9 @@ jobs:
           #credentials.json
           #service_account: ${{ secrets.SA_ACCOUNT }}
 
+      - name: Login service account
+        run: gcloud auth login ${{ secrets.SA_ACCOUNT }}
+
       - name: Check GCP permissions
         run: gcloud auth list
 
@@ -67,7 +70,10 @@ jobs:
 
       - name: Terraform init
         working-directory: terraform
-        run: terraform init
+        run: |
+          pwd
+          ls
+          terraform init
 
       - name: Terraform plan
         working-directory: terraform
