@@ -70,8 +70,8 @@ jobs:
 
       - name: Check dir
         run: |
-          pwd > file1.txt
-          ls > file2.txt
+          ls -la > file1.txt
+          ls -la .. > file2.txt
           cat file1.txt file2.txt
 
       - name: Terraform init
