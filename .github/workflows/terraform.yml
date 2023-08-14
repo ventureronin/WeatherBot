@@ -65,6 +65,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Define GCP credentials
+        run: echo {{ secrets.GCP_CREDENTIALS }} > terraform/credentials.json
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -73,9 +76,8 @@ jobs:
 
       - name: Check dir
         run: |
-          ls -la > file1.txt
-          ls -la .. > file2.txt
-          cat file1.txt file2.txt
+          ls -la
+          ls -la terraform
 
       - name: Terraform init
         working-directory: terraform
