@@ -64,15 +64,15 @@ jobs:
     steps:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-        working-directory: terraform
         with:
           terraform_version: latest
           terraform_wrapper: false
 
       - name: Check dir
         run: |
-          pwd
-          ls
+          pwd > file.txt
+          ls > file.txt
+          cat file.txt file.txt
 
       - name: Terraform init
         working-directory: terraform
