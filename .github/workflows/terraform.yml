@@ -82,7 +82,7 @@ jobs:
 
       - name: Terraform plan
         working-directory: terraform
-        run: terraform plan -lock=false -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" -var="GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS }}"
+        run: terraform plan -lock=false -var-file=tfvars.tfvars
 
 # get external ip?
       - name: Terraform apply
