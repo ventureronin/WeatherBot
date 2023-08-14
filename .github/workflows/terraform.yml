@@ -70,9 +70,9 @@ jobs:
 
       - name: Check dir
         run: |
-          pwd > file.txt
-          ls > file.txt
-          cat file.txt file.txt
+          pwd > file1.txt
+          ls > file2.txt
+          cat file1.txt file2.txt
 
       - name: Terraform init
         working-directory: terraform
