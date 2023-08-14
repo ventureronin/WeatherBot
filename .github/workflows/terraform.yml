@@ -64,6 +64,7 @@ jobs:
     steps:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+        working-directory: terraform
         with:
           terraform_version: latest
           terraform_wrapper: false
@@ -72,6 +73,7 @@ jobs:
         run: |
           pwd
           ls
+
       - name: Terraform init
         working-directory: terraform
         run: terraform init
