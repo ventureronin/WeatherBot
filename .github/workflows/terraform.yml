@@ -65,9 +65,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Define GCP credentials
-        run: echo {{ secrets.GCP_CREDENTIALS }} > terraform/credentials.json
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -85,7 +82,7 @@ jobs:
 
       - name: Terraform plan
         working-directory: terraform
-        run: terraform plan -lock=false -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}"
+        run: terraform plan -lock=false -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" -var="GCP_CREDENTIALS=${{ secrets.GCP_CREDENTIALS }}"
 
 # get external ip?
       - name: Terraform apply

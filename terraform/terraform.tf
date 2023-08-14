@@ -1,5 +1,7 @@
 variable "GCP_PROJECT_ID" {}
 
+variable "GCP_CREDENTIALS" {}
+
 variable "region_prj" {
   description = "Region for the project"
   type        = string
@@ -22,7 +24,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("credentials.json")
+  credentials = var.GCP_CREDENTIALS
   project     = var.GCP_PROJECT_ID
   region      = var.region_prj
   zone        = var.zone_prj
