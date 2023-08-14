@@ -56,42 +56,53 @@ jobs:
       - name: Check GCP permissions
         run: gcloud auth list
 
-  Terraform:
-    name: 'Terraform set up'
-    needs: Google-Auth_Docker-pull
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+      - name: SSH into GCLOUD
+        uses: 'google-github-actions/ssh-compute@v0'
         with:
-          terraform_version: latest
-          terraform_wrapper: false
+          instance_name: 'instance-template-1'
+          zone: 'europe-north1-b'
+          ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
+          command: |
+            scp -r ventureronin/tg_weatherbot:latest /. && \
+            docker run tg_weatherbot:latest
+            
 
-      - name: Check dir
-        run: |
-          ls -la
-          ls -la terraform
-
-      - name: Terraform init
-        working-directory: terraform
-        run: terraform init
-
-      - name: Terraform plan
-        working-directory: terraform
-        run: terraform plan -lock=false -var-file=tfvars.tf
-
-# get external ip?
-      - name: Terraform apply
-        working-directory: terraform
-        if: contains(github.event.head_commit.message, 'tf apply')
-        run: terraform apply -lock=false -auto-approve -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
-        
-      - name: Terraform destroy
-        working-directory: terraform
-        if: contains(github.event.head_commit.message, 'tf destroy')
-        run: terraform destroy -lock=false -auto-approve -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
-
+#  Terraform:
+#    name: 'Terraform set up'
+#    needs: Google-Auth_Docker-pull
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Setup Terraform
+#        uses: hashicorp/setup-terraform@v2
+#        with:
+#          terraform_version: latest
+#          terraform_wrapper: false
+#
+#      - name: Check dir
+#        run: |
+#          ls -la
+#          ls -la terraform
+#
+#      - name: Terraform init
+#        working-directory: terraform
+#        run: terraform init
+#
+#      - name: Terraform plan
+#        working-directory: terraform
+#        run: terraform plan -lock=false -var-file=tfvars.tf
+#
+## get external ip?
+#      - name: Terraform apply
+#        working-directory: terraform
+#        if: contains(github.event.head_commit.message, 'tf apply')
+#        run: terraform apply -lock=false -auto-approve -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
+#
+#      - name: Terraform destroy
+#        working-directory: terraform
+#        if: contains(github.event.head_commit.message, 'tf destroy')
+#        run: terraform destroy -lock=false -auto-approve -var="GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
+#
