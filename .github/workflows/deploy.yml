@@ -19,6 +19,7 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+          create_credentials_file: false
 
       - name: SSH into Gcloud
         uses: google-github-actions/ssh-compute@v0
@@ -26,4 +27,8 @@ jobs:
           instance_name: 'instance-template-1'
           zone: 'europe-north1-b'
           ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
-          script: scripts/docker-login-pull.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
+          command: |
+            pwd
+            ls -la
+            ls -la scripts
+            scripts/docker-login-pull.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
