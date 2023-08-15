@@ -1,0 +1,29 @@
+name: CI/CD
+
+on:
+  workflow_run:
+    workflows: build
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  gcp-init-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/chechout@v3
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentuals_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: SSH into Gcloud
+        uses: google-github-actions/ssh-compute@v0
+        with:
+          instance_name: 'instance-template-1'
+          zone: 'europe-north1-b'
+          ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
+          script: scripts/docker-login-pull.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}

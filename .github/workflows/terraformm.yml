@@ -1,15 +1,15 @@
 name: terraform deploy
 
 on:
-  push:
-    paths:
-      - '.github/workflows/terraform.yml'
-    branches:
-      - main
-  workflow_run:
-    workflows: build
-    types:
-      - completed
+#  push:
+#    paths:
+#      - '.github/workflows/terraformm.yml'
+#    branches:
+#      - main
+#  workflow_run:
+#    workflows: build
+#    types:
+#      - completed
   workflow_dispatch:
 
 jobs:
