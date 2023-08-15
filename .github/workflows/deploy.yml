@@ -29,9 +29,7 @@ jobs:
 #          create_credentials_file: false
 
       - name: try to think
-        run: |
-          ls -la
-          ls -la scripts
+        run: sudo chmod +x scripts/docker-login-pull.sh
 
       - name: SSH into Gcloud
         id: 'compute-ssh'
