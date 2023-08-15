@@ -1,6 +1,11 @@
-name: CI/CD
+name: CICD
 
 on:
+  push:
+    paths:
+      - '.github/workflows/deploy.yml'
+    branches:
+      - main
   workflow_run:
     workflows: build
     types:
@@ -9,6 +14,7 @@ on:
 
 jobs:
   gcp-init-bot:
+    name: 'GCP auth, and setup&run script'
     runs-on: ubuntu-latest
 
     steps:
@@ -21,6 +27,10 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 #          create_credentials_file: false
+
+      - name: try to think
+        run: |
+          ls -la
 
       - name: SSH into Gcloud
         id: 'compute-ssh'
