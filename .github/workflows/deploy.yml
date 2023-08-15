@@ -29,9 +29,4 @@ jobs:
           instance_name: 'instance-template-1'
           zone: 'europe-north1-b'
           ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
-          command: 'echo Hello world'
-#          |
-#            pwd
-#            ls -la
-#            ls -la scripts
-#            scripts/docker-login-pull.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
+          script: scripts/docker-login-pull.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
