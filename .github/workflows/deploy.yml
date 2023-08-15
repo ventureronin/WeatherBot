@@ -18,7 +18,7 @@ jobs:
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v1
         with:
-          credentuals_json: ${{ secrets.GCP_CREDENTIALS }}
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: SSH into Gcloud
         uses: google-github-actions/ssh-compute@v0
