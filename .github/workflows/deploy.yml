@@ -40,4 +40,4 @@ jobs:
           ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
           command: |
             sudo chmod +x ${{ github.workspace }}/scripts/docker-login-pull.sh
-            ./${{ github.workspace }}/scripts/docker-login-pull.sh #${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
+            ./${{ github.workspace }}/scripts/docker-login-pull.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
