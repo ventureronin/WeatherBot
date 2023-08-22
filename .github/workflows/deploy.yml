@@ -34,25 +34,11 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
 
-      - name: Test gcloud sdk
-        run: gcloud config list
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Download container
-        run: docker pull ventureronin/tg_weatherbot:latest
-
-      - name: Pack container into tar
-        run: docker save -o bot_image.tar ventureronin/tg_weatherbot:latest
-
       - name: Gcloud scp
-        run: |
-          gcloud compute scp bot_image.tar instance-template-1:bot_image.tar --zone=europe-north1-b
-          gcloud compute ssh instance-template-1 --zone=europe-north1-b --command="docker load -i bot_image.tar"
+        run: gcloud compute scp scripts/docker-login-pull.sh instance-template-1:docker-login-pull.sh --zone=europe-north1-b
+
+      - name: Gcloud ssh command
+        run: gcloud compute ssh instance-template-1 --zone=europe-north1-b --command="sudo chmod +x docker-login-pull.sh && ./docker-login-pull.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}"
         #runner@${{ env.GCP_IP }} --ssh-key-file=${{ secrets.SSH_PRIVATE_KEY }}
         
 #      - name: SSH into Gcloud
