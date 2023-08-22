@@ -31,13 +31,22 @@ jobs:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 #          create_credentials_file: false
 
-      - name: SSH into Gcloud
-        id: 'compute-ssh'
-        uses: google-github-actions/ssh-compute@v0
-        with:
-          instance_name: 'instance-template-1'
-          zone: 'europe-north1-b'
-          ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
-          command: |
-            sudo chmod +x ${{ github.workspace }}/scripts/docker-login-pull.sh
-            ./${{ github.workspace }}/scripts/docker-login-pull.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: Test gcloud sdk
+        run: gcloud config list
+
+      - name: Gcloud ssh
+        run: gcloud auth list
+        
+#      - name: SSH into Gcloud
+#        id: 'compute-ssh'
+#        uses: google-github-actions/ssh-compute@v0
+#        with:
+#          instance_name: 'instance-template-1'
+#          zone: 'europe-north1-b'
+#          ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
+#          command: |
+#            sudo chmod +x ${{ github.workspace }}/scripts/docker-login-pull.sh
+#            ./${{ github.workspace }}/scripts/docker-login-pull.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
