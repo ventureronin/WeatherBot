@@ -7,7 +7,7 @@ ARG json
 ENV config=$config
 ENV json=$json
 RUN echo $config > /application/config && \
-    echo "$json" | base64 -d > /application/opt.json && \
+    echo "$json" > /application/opt.json && \
     pip install --no-cache-dir -r requirements.txt
 
 CMD python app.py
