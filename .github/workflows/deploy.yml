@@ -12,6 +12,9 @@ on:
       - completed
   workflow_dispatch:
 
+env:
+  GCP_IP: 34.88.93.131
+
 jobs:
   gcp-init-bot:
     name: 'GCP auth, and setup&run script'
@@ -38,7 +41,9 @@ jobs:
         run: gcloud config list
 
       - name: Gcloud ssh
-        run: gcloud auth list
+        run: gcloud compute ssh instance-template-1 --zone=europe-north1-b --ssh-key-file=${{ secrets.SSH_PRIVATE_KEY }} \
+          --command="ps -ejH"
+        #runner@${{ env.GCP_IP }} --ssh-key-file=${{ secrets.SSH_PRIVATE_KEY }}
         
 #      - name: SSH into Gcloud
 #        id: 'compute-ssh'
