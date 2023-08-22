@@ -29,7 +29,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-# Download artifact, rds,
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v4
