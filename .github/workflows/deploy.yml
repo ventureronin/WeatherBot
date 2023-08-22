@@ -44,14 +44,15 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Download container
-        run: |
-          docker pull ventureronin/tg_weatherbot:latest
-          docker save -o ~/bot_image.tar tg_weatherbot:latest
+        run: docker pull ventureronin/tg_weatherbot:latest
+
+      - name: Pack container into tar
+        run: docker save -o bot_image.tar ventureronin/tg_weatherbot:latest
 
       - name: Gcloud scp
         run: |
-          gcloud compute scp ~/bot_image.tar instance-template-1:~/bot_image.tar --zone=europe-north1-b
-          gcloud compute ssh instance-template-1 --zone=europe-north1-b --command="docker load -i ~/bot_image.tar"
+          gcloud compute scp bot_image.tar instance-template-1:bot_image.tar --zone=europe-north1-b
+          gcloud compute ssh instance-template-1 --zone=europe-north1-b --command="docker load -i bot_image.tar"
         #runner@${{ env.GCP_IP }} --ssh-key-file=${{ secrets.SSH_PRIVATE_KEY }}
         
 #      - name: SSH into Gcloud
