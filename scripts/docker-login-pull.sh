@@ -5,8 +5,10 @@ if [ "$#" -ne 2 ]; then
     exit 1
 fi
 
+sudo systemctl stop docker.service
 sudo apt update
 sudo apt install -y docker.io
+sudo systemctl start docker.service
 sudo usermod -aG docker "$USER"
 
 USERNAME="$1"
