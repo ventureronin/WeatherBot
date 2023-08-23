@@ -12,9 +12,6 @@ async def on_startup(dispatcher):
     with open('opt.json', 'r') as f:
         data = json.load(f)
     f.close()
-    # for i in data:
-    #     await bot .send_message(chat_id=i,
-    #                            text=f"Бот перезапущен, что бы он 'слышал' названия городов - введите команду /start")
     await set_default_commands(dispatcher)
     asyncio.ensure_future(set_scheduler())
     print("Bot starting... OK🤖")
