@@ -23,7 +23,6 @@ async def set_scheduler():
     aioschedule.every().friday.at("7:00").do(scheduled_weather, 1)
     aioschedule.every().saturday.at("10:00").do(scheduled_weather, 1)
     aioschedule.every().sunday.at("10:00").do(scheduled_weather, 1)
-    aioschedule.every().wednesday.at("21:08").do(print('🤖🤖🤖test output🤖🤖🤖'), 1)
 
     aioschedule.every().monday.at("6:00").do(scheduled_weather, 2)
     aioschedule.every().monday.at("18:00").do(scheduled_weather, 2)
