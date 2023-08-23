@@ -8,10 +8,10 @@ async def scheduled_weather(mode):
     with open('opt.json', 'r') as f:
         data = json.load(f)
     for i in data:
-        if data[str(i)]['alarm_mode'] == 1 and mode == 1:
-            await weather('Полтава', 6, i)
-        elif data[str(i)]['alarm_mode'] == 2 and mode == 2:
-            await weather('Pruszcz gdański', 6, i)
+        if data[str(i)]['alarm_mode'] == 1 and mode == 1 and data[str(i)]['alarm_on'] == 1:
+            await weather('Полтава', 8, i)
+        elif data[str(i)]['alarm_mode'] == 2 and mode == 2 and data[str(i)]['alarm_on'] == 1:
+            await weather('Pruszcz gdański', 8, i)
     f.close()
 
 
@@ -23,7 +23,7 @@ async def set_scheduler():
     aioschedule.every().friday.at("7:00").do(scheduled_weather, 1)
     aioschedule.every().saturday.at("10:00").do(scheduled_weather, 1)
     aioschedule.every().sunday.at("10:00").do(scheduled_weather, 1)
-    aioschedule.every().friday.at("9:51").do(scheduled_weather, 1)
+    aioschedule.every().wednesday.at("21:08").do(print('🤖🤖🤖test output🤖🤖🤖'), 1)
 
     aioschedule.every().monday.at("6:00").do(scheduled_weather, 2)
     aioschedule.every().monday.at("18:00").do(scheduled_weather, 2)
@@ -40,4 +40,3 @@ async def set_scheduler():
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
-    pass
