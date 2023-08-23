@@ -4,6 +4,7 @@ build
 - DOCKER_PASSWORD
 - OPT_JSON 
 - TG_PROD_TOKEN
+- [dev]TG_TEST_TOKEN
 
 deploy
 - GCP_CREDENTIALS
