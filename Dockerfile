@@ -1,4 +1,4 @@
-FROM python:3.9.7-slim
+FROM python:3.9-alpine
 
 WORKDIR /application/
 COPY ./app /application/
@@ -9,6 +9,6 @@ ENV json=$json
 RUN echo $config > /application/config && \
     echo "$json" > /application/opt.json && \
     pip install --no-cache-dir -r requirements.txt && \
-    sudo apt install nano
+    apk add --no-cache nano
 
 CMD python app.py
