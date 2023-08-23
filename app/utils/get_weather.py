@@ -85,10 +85,10 @@ async def weather(city, num, idd):
             await bot.send_message(chat_id=idd, text=f"{output}")
             await bot.send_message(chat_id=admin_id,
                                    text=f"User:{my_data[str(idd)]['name']}\n Погода на {int(num/8)} суток, в городе {city}")
-            logs.write(f"User:{my_data[str(idd)]['name']} Погода на {int(num/8)} суток, в городе {city}\n")
+            logs.write(f"[{datetime.datetime.now()}]User:{my_data[str(idd)]['name']} Погода на {int(num/8)} суток, в городе {city}\n")
     except:
         await bot.send_message(chat_id=idd,
                                text=f"{emoji['Skeleton']}Что то пошло не так{emoji['Skeleton']}")
         await bot.send_message(chat_id=admin_id,
                                text=f"Somthing went wrong! in get_weather.weather\n User:{my_data[str(idd)]['name']}")
-        logs.write(f"Somthing went wrong! in get_weather.weather User:{my_data[str(idd)]['name']}\n")
+        logs.write(f"[{datetime.datetime.now()}] -('v')- -('v')- -('v')-Somthing went wrong! in get_weather.weather User:{my_data[str(idd)]['name']}\n")
