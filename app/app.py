@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 from aiogram import executor
 # token, storage, bot, dp, CurrentState
 from loader.handlers import *  # !!!!!!!!!!!!!!!
@@ -12,8 +13,11 @@ async def on_startup(dispatcher):
     with open('opt.json', 'r') as f:
         data = json.load(f)
     f.close()
+
     await set_default_commands(dispatcher)
     asyncio.ensure_future(set_scheduler())
+    logs = open('logs.log', 'a', encoding='utf-8')
+    logs.write(f"[{datetime.datetime.now()}]Bot starting... OK")
     print("Bot starting... OK🤖")
 
 
