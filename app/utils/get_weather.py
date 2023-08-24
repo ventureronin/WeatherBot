@@ -1,6 +1,7 @@
 import requests
 import datetime
 import json
+import html
 from loader import types, bot, admin_id
 
 emoji = {
@@ -29,7 +30,7 @@ async def weather(city, num, idd):
         with open('opt.json', 'r') as f:
             my_data = json.load(f)
         f.close()
-        logs = open('logs.log', 'w')
+        logs = open('logs.log', 'a', encoding='utf-8')
 
         if num == 0:
             r = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}"
@@ -83,12 +84,12 @@ async def weather(city, num, idd):
                 output += out
 
             await bot.send_message(chat_id=idd, text=f"{output}")
-            await bot.send_message(chat_id=admin_id,
-                                   text=f"User:{my_data[str(idd)]['name']}\n Погода на {int(num/8)} суток, в городе {city}")
-            logs.write(f"[{datetime.datetime.now()}]User:{my_data[str(idd)]['name']} Погода на {int(num/8)} суток, в городе {city}\n")
-    except:
-        await bot.send_message(chat_id=idd,
-                               text=f"{emoji['Skeleton']}Что то пошло не так{emoji['Skeleton']}")
-        await bot.send_message(chat_id=admin_id,
-                               text=f"Somthing went wrong! in get_weather.weather\n User:{my_data[str(idd)]['name']}")
-        logs.write(f"[{datetime.datetime.now()}] -('v')- -('v')- -('v')-Somthing went wrong! in get_weather.weather User:{my_data[str(idd)]['name']}\n")
+
+            await bot.send_message(chat_id=admin_id,text=f"User:{my_data[str(idd)]['name']}\n Погода на {int(num / 8)} суток, в городе {html.escape(city)}")  # Экранирование города
+            logs.write(f"[{datetime.datetime.now()}] User:{my_data[str(idd)]['name']} Погода на {int(num / 8)} суток, в городе {html.escape(city)}\n")
+    except Exception as e:
+        error_message = f"{emoji['Skeleton']}Что-то пошло не так{emoji['Skeleton']}\nОшибка: {html.escape(str(e))}"  # Экранирование ошибки
+        await bot.send_message(chat_id=idd, text=error_message)
+        admin_error_message = f"Somthing went wrong! Ошибка: {html.escape(str(e))} in get_weather.weather\n User:{html.escape(my_data[str(idd)]['name'])}"  # Экранирование имени пользователя
+        await bot.send_message(chat_id=admin_id, text=admin_error_message)
+        logs.write(f"[{datetime.datetime.now()}] -('v')- -('v')- -('v')- Somthing went wrong! {html.escape(str(e))} in get_weather.weather User:{html.escape(my_data[str(idd)]['name'])}\n")
