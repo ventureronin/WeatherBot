@@ -1,5 +1,6 @@
 import json
 import aioschedule
+from datetime import datetime, timedelta, timezone
 import asyncio
 from utils.get_weather import weather
 
@@ -16,6 +17,8 @@ async def scheduled_weather(mode):
 
 
 async def set_scheduler():
+    kiev_timezone = timezone(timedelta(hours=3))
+    aioschedule.set_timezone(kiev_timezone)
     aioschedule.every().monday.at("7:00").do(scheduled_weather, 1)
     aioschedule.every().tuesday.at("7:00").do(scheduled_weather, 1)
     aioschedule.every().wednesday.at("7:00").do(scheduled_weather, 1)
