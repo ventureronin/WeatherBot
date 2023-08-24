@@ -2,3 +2,4 @@
 .idea/
 /app/opt.json
 /app/config
+/app/logs.log
