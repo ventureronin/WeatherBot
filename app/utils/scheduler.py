@@ -16,12 +16,11 @@ async def scheduled_weather(mode):
 
 
 async def set_scheduler():
-    aioschedule.every().monday.at("7:00").do(scheduled_weather, 1)
-    aioschedule.every().tuesday.at("7:00").do(scheduled_weather, 1)
-    aioschedule.every().wednesday.at("7:00").do(scheduled_weather, 1)
-    aioschedule.every().thursday.at("7:00").do(scheduled_weather, 1)
-    aioschedule.every().thursday.at("13:10").do(scheduled_weather, 1)
-    aioschedule.every().friday.at("7:00").do(scheduled_weather, 1)
+    aioschedule.every().monday.at("6:30").do(scheduled_weather, 1)
+    aioschedule.every().tuesday.at("6:30").do(scheduled_weather, 1)
+    aioschedule.every().wednesday.at("6:30").do(scheduled_weather, 1)
+    aioschedule.every().thursday.at("6:30").do(scheduled_weather, 1)
+    aioschedule.every().friday.at("6:30").do(scheduled_weather, 1)
     aioschedule.every().saturday.at("10:00").do(scheduled_weather, 1)
     aioschedule.every().sunday.at("10:00").do(scheduled_weather, 1)
 
