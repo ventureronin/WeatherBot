@@ -18,6 +18,7 @@ async def on_startup(dispatcher):
     asyncio.ensure_future(set_scheduler())
     logs = open('logs.log', 'a', encoding='utf-8')
     logs.write(f"[{datetime.datetime.now()}]Bot starting... OK\n")
+    logs.close()
     print("Bot starting... OK🤖")
 
 

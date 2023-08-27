@@ -87,9 +87,11 @@ async def weather(city, num, idd):
 
             await bot.send_message(chat_id=admin_id,text=f"User:{my_data[str(idd)]['name']}\n Погода на {int(num / 8)} суток, в городе {html.escape(city)}")  # Экранирование города
             logs.write(f"[{datetime.datetime.now()}] User:{my_data[str(idd)]['name']} Погода на {int(num / 8)} суток, в городе {html.escape(city)}\n")
+            logs.close()
     except Exception as e:
         error_message = f"{emoji['Skeleton']}Что-то пошло не так{emoji['Skeleton']}\nОшибка: {html.escape(str(e))}"  # Экранирование ошибки
         await bot.send_message(chat_id=idd, text=error_message)
         admin_error_message = f"Somthing went wrong! Ошибка: {html.escape(str(e))} in get_weather.weather\n User:{html.escape(my_data[str(idd)]['name'])}"  # Экранирование имени пользователя
         await bot.send_message(chat_id=admin_id, text=admin_error_message)
         logs.write(f"[{datetime.datetime.now()}] -('v')- -('v')- -('v')- Somthing went wrong! {html.escape(str(e))} in get_weather.weather User:{html.escape(my_data[str(idd)]['name'])}\n")
+        logs.close()
