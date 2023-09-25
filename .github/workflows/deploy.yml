@@ -37,8 +37,9 @@ jobs:
         run: |
           echo ${{ secrets.AWS_SSH_KEY }} > key.pem
           sudo chmod 600 key.pem
-          ssh-add key.pem
           eval "$(ssh-agent -s)"
+          ssh-add key.pem
+
       - name: AWS scp
         run: scp -i key.pem scripts/docker-login-pull.sh ubuntu@ec2-13-48-24-243.eu-north-1.compute.amazonaws.com:docker-login-pull.sh
 
