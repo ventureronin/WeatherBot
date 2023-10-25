@@ -15,5 +15,5 @@ USERNAME="$1"
 PASSWORD="$2"
 
 echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin
-docker pull ventureronin/tg_weatherbot:latest
+docker pull ventureronin/tg_weatherbot_dev:latest
 docker run -d -e TZ=Europe/Kiev ventureronin/tg_weatherbot:latest
