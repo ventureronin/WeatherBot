@@ -7,7 +7,7 @@ on:
       - '.github/workflows/build.yml'
       - 'Dockerfile'
     branches:
-      - main
+      - dev
   workflow_dispatch:
 
 jobs:
@@ -34,8 +34,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ventureronin/tg_weatherbot:latest
+          tags: ventureronin/tg_weatherbot_dev:latest
           no-cache: true
           build-args: |
-            config=${{ secrets.TG_PROD_TOKEN }}
+            config=${{ secrets.TG_TEST_TOKEN }}
             json=${{ secrets.OPT_JSON }}

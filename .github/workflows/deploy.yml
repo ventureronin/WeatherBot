@@ -5,7 +5,7 @@ on:
     paths:
       - '.github/workflows/deploy.yml'
     branches:
-      - main
+      - dev
   workflow_run:
     workflows: Build
     types:
