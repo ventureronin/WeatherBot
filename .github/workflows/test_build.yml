@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'app/**'
-      - '.github/workflows/build.yml'
+      - '.github/workflows/test_build.yml'
       - 'Dockerfile'
     branches:
       - dev

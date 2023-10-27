@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     paths:
-      - '.github/workflows/deploy.yml'
+      - '.github/workflows/test_deploy.yml'
     branches:
       - dev
   workflow_run:
