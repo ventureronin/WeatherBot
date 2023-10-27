@@ -8,6 +8,8 @@ on:
       - dev
   workflow_run:
     workflows: Build
+    branches:
+      - dev
     types:
       - completed
   workflow_dispatch:
