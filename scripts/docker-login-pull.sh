@@ -1,7 +1,7 @@
 #!/bin/bash
 # Проверка наличия аргументов
 if [ "$#" -ne 2 ]; then
-    echo "ERROR\nUsing: $0 <username> <password>"
+    echo "ERROR\nUsing: $0 missed 2 arguments"
     exit 1
 fi
 
