@@ -37,11 +37,12 @@ jobs:
 
       - name: configure ssh
         run: |
+          
           echo ${{ secrets.AWS_SSH_KEY }} > key.pem
           sudo chmod 600 key.pem
-          ssh-agent /bin/sh
+          ssh-agent /bin/sh 
           ssh-add key.pem
-          exit
+          ssh -i "key.pem" ec2-user@ec2-13-48-58-38.eu-north-1.compute.amazonaws.com
 
       - name: AWS scp
         run: scp -i key.pem scripts/docker-login-pull.sh ubuntu@ec2-13-48-24-243.eu-north-1.compute.amazonaws.com:docker-login-pull.sh
