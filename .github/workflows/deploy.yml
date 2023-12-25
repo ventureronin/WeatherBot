@@ -35,7 +35,7 @@ jobs:
 
       - name: configure ssh
         run: |
-          echo ${{ secrets.AWS_SSH_KEY }} > key.pem
+          echo "${{ secrets.AWS_SSH_KEY }}" > key.pem
           sudo chmod 600 key.pem
           eval "$(ssh-agent -s)"
           ssh-add key.pem
